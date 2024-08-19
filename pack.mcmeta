@@ -1,0 +1,20 @@
+{
+   "pack": {
+      "pack_format": 10,
+      "description": "Magic Shaders! Now for all versions of Minecraft!",
+      "required": [
+         "minecraft:shaders"
+      ]
+   },
+   "overlays": {
+      "entries": [
+         {
+            "formats": {
+               "min_inclusive": 32,
+               "max_inclusive": 99
+            },
+            "directory": "1_20_5"
+         }
+      ]
+   }
+}
