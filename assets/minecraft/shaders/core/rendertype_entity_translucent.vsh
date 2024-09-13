@@ -2,6 +2,8 @@
 
 #moj_import <light.glsl>
 #moj_import <fog.glsl>
+#moj_import <cem_locs.glsl>
+#moj_import <cem_faces.glsl>
 
 in vec3 Position;
 in vec4 Color;
@@ -27,7 +29,14 @@ uniform vec2 ScreenSize;
 out float vertexDistance;
 out vec4 vertexColor;
 out vec2 texCoord0;
+out vec2 texCoord1;
+out ivec2 texCoord2;
 out vec4 normal;
+
+uniform float FogStart;
+uniform float FogEnd;
+uniform vec4 FogColor;
+out float fogAlpha;
 
 flat out int armorType;
 flat out vec4 tint;
@@ -40,6 +49,7 @@ flat out int cem;
 flat out int cem_reverse;
 flat out vec4 cem_light;
 out vec4 cem_color;
+out vec4 test_color;
 out float emissive;
 #define SPACING 1024.0
 #define MAXRANGE (0.5 * SPACING)
@@ -65,15 +75,18 @@ vec4 getCemData(ivec2 cords)
 }
 
 
+
 void main() {
     emissive = 0;
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
     texCoord0 = UV0;
+    texCoord1 = UV1;
+    texCoord2 = UV2;
     vec3 pos = Position;
     vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, Color) * texelFetch(Sampler2, UV2 / 16, 0);
     
 #moj_import <fog_reader.glsl>
-    normal = ProjMat * ModelViewMat * vec4(Normal, 0.0);
+    normal = gl_Position;
     vec2 texSize = textureSize(Sampler0, 0);
     vec2 uv = floor(UV0 * texSize);
 
@@ -89,26 +102,40 @@ void main() {
 
 	ivec2 dim=textureSize(Sampler0,0);
 
+    if((FogStart > 3e38) && (ProjMat[2][3] != 0)){
+        return;
+    }
+
+    // 
 	if(!((ProjMat[2][3]==0.||dim.x!=64||dim.y!=64))){
 
     
     int cube = (gl_VertexID / 24) % 24;
-	int partId=gl_VertexID / 4 % (6*7);
+    int face = gl_VertexID / 4 % 6;
         if (getChannel(ivec2(1,0),0) == 253.0 &&
             getChannel(ivec2(1,0),2) == 253.0) //body
         {
             cem_color = getCemData(ivec2(1, 0));
 
-            if(cube==1){
-                if(partId==9)
-                {
+            //boobs
+            if(cube==BODY ){
+                if(face==NORTH_FACE){
                     cem = 1;
                     cem_reverse = 1;
                     corner = corner.yx;
                     cem_size = 1;
                 }
             }
+            if(cube==BODY_OVERLAY ){
+                if(face==NORTH_FACE){
+                    cem = 2;
+                    cem_reverse = 0;
+                    corner = corner.yx;
+                    cem_size = 1;
+                }
+            }
         }
+        
         
         //cape
         if (getChannel(ivec2(0,0),0) == 252.0 &&
@@ -116,8 +143,8 @@ void main() {
         {
             cem_color = getCemData(ivec2(0, 0));
 
-            if(cube==1){
-                if(partId==11)
+            if(cube==BODY){
+                if(face==SOUTH_FACE)
                 {
                     cem = 3;
                     cem_reverse = 3;
@@ -132,8 +159,8 @@ void main() {
         {
             cem_color = getCemData(ivec2(0, 0));
 
-            if(cube==1){
-                if(partId==11)
+            if(cube==BODY){
+                if(face==SOUTH_FACE)
                 {
                     emissive = 1;
                     cem = 3;
@@ -150,8 +177,8 @@ void main() {
             getChannel(ivec2(0,0),2) == 232.0) //body
         {
             cem_color = getCemData(ivec2(0, 0));
-            if(cube==1){
-                if(partId==11)
+            if(cube==BODY){
+                if(face==SOUTH_FACE)
                 {
                     cem = 4;
                     cem_reverse = 3;
@@ -160,14 +187,14 @@ void main() {
                 }
             }
         }
-
+        
         //emissive wing
         if (getChannel(ivec2(0,0),0) == 233.0 &&
             getChannel(ivec2(0,0),2) == 233.0) //body
         {
             cem_color = getCemData(ivec2(0, 0));
-            if(cube==1){
-                if(partId==11)
+            if(cube==BODY){
+                if(face==SOUTH_FACE)
                 {
                     emissive = 1;
                     cem = 4;
@@ -177,6 +204,57 @@ void main() {
                 }
             }
         }
+        
+
+        //elf ears
+        if (getChannel(ivec2(7,0),0) == 120.0 &&
+            getChannel(ivec2(7,0),2) == 120.0) //head
+        {
+            cem_color = getCemData(ivec2(0, 0));
+            if(cube==HEAD){
+                if(face==RIGHT_FACE)
+                {
+                    cem = 5;
+                    cem_reverse = 0;
+                    corner = corner.yx;
+                    cem_size = 1;
+                }
+                if(face==LEFT_FACE)
+                {
+                    cem = 6;
+                    cem_reverse = 0;
+                    corner = corner.yx;
+                    cem_size = 1;
+                }
+            }
+        }
+        
+        //emissive elf ears
+        if (getChannel(ivec2(7,0),0) == 120.0 &&
+            getChannel(ivec2(7,0),1) == 120.0 &&
+            getChannel(ivec2(7,0),2) == 120.0) //head
+        {
+            cem_color = getCemData(ivec2(0, 0));
+            if(cube==HEAD){
+                if(face==RIGHT_FACE)
+                {
+                    emissive = 1;
+                    cem = 5;
+                    cem_reverse = 0;
+                    corner = corner.yx;
+                    cem_size = 1;
+                }
+                if(face==LEFT_FACE)
+                {
+                    emissive = 1;
+                    cem = 6;
+                    cem_reverse = 0;
+                    corner = corner.yx;
+                    cem_size = 1;
+                }
+            }
+        }
+
     }
 
     if (gl_VertexID / 4 == 3)
@@ -186,4 +264,5 @@ void main() {
     {
         #moj_import <cem/vert_setup.glsl>
     }
+
 }

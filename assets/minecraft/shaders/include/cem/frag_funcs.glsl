@@ -53,7 +53,7 @@ color = sBox(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * mo
 }
 
 #define ADD_SQUARE_SOLID(p1, p2, p3, color) { \
-    color = sSquare_Solid(-center, dirTBN, p1 * modelSize, p2 * modelSize, p3 * modelSize, vertexColor, color, minT);\
+    color = sSquare_Solid(-center, dirTBN, p1 * modelSize, p2 * modelSize, p3 * modelSize, color, minT);\
 }
 
 #define ADD_BOX_SOLID(pos, size, dSide, uSide, nSide, eSide, sSide, wSide, color) { \
@@ -158,6 +158,26 @@ vec4 sSquareWithRotation(vec3 ro, vec3 rd, vec3 p1, vec3 p2, vec3 p3, vec4 tint,
     } else if (rotAngle == 3.0) {
         // Rotate UV coordinates 270 degrees clockwise
         rotatedUV = uv.xy + uv.zw * vec2(1.0 - tris.y, tris.x);
+    }
+    else if (rotAngle == 4.0) {
+        // Rotate UV coordinates 360 degrees clockwise
+        rotatedUV = uv.xy + uv.zw * vec2(1.0 - tris.x, tris.y);
+    }
+    else if (rotAngle == 5.0){
+        //invert uv but with 90 degrees
+        rotatedUV = uv.xy + uv.zw * vec2(1.0 - tris.y, 1.0 - tris.x);
+    }
+    else if (rotAngle == 6.0){
+        //invert uv but with 180 degrees
+        rotatedUV = uv.xy + uv.zw * vec2(1.0 - tris.x, 1.0 - tris.y);
+    }
+    else if (rotAngle == 7.0){
+        //invert uv but with 270 degrees
+        rotatedUV = uv.xy + uv.zw * vec2(tris.y, tris.x);
+    }
+    else if (rotAngle == 8.0){
+        //invert uv but with 360 degrees
+        rotatedUV = uv.xy + uv.zw * vec2(tris.x, tris.y);
     }
     vec4 col = texelFetch(Sampler0, ivec2(rotatedUV), 0) * tint;
 

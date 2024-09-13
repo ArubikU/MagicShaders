@@ -1,0 +1,13 @@
+#define HEAD 0
+#define HEAD_OVERLAY 10
+#define BODY 1
+#define BODY_OVERLAY 11
+
+#define RIGHT_ARM 2
+#define RIGHT_ARM_OVERLAY 12
+#define LEFT_LEG 3
+#define LEFT_LEG_OVERLAY 13
+#define LEFT_ARM 4
+#define LEFT_ARM_OVERLAY 14
+#define RIGHT_LEG 5
+#define RIGHT_LEG_OVERLAY 15

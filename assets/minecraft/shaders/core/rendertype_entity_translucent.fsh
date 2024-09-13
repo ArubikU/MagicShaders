@@ -24,9 +24,12 @@ uniform float GameTime;
 in float vertexDistance;
 in vec4 vertexColor;
 in vec2 texCoord0;
+in vec2 texCoord1;
+in ivec2 texCoord2;
 in vec4 normal;
 in vec4 cem_color;
 in float emissive;
+in float fogAlpha;
 
 
 out vec4 fragColor;
@@ -67,6 +70,11 @@ void main() {
             {
                modelSize /= res.y;
 
+                break;
+            }
+            default:
+            {
+                modelSize /= res.y;
                 break;
             }
         }
@@ -178,6 +186,24 @@ void main() {
                 break;
 
             }
+            case 5: 
+            {
+                mat3 rotMat = Rotate3(PI / 4, Z);
+                ADD_SQUARE_WITH_ROTATION(vec3(-4, -4, 0), vec3(4,-4 ,0), vec3(-4, 4, 0), vec4(0,8,8,8),2);
+
+                
+                ADD_SQUARE_WITH_ROTATION(vec3(0, 1, 0), vec3(0,1 ,-5), vec3(0, -2, 0), vec4(3,5,5,3),4);
+                break;
+            }
+            case 6: 
+            {
+                mat3 rotMat = Rotate3(PI / 4, Z);
+                ADD_SQUARE_WITH_ROTATION(vec3(-4, -4, 0), vec3(4,-4 ,0), vec3(-4, 4, 0), vec4(16,8,8,8),2);
+                ADD_SQUARE_WITH_ROTATION(vec3(0, 1, 0), vec3(0,1 ,-5), vec3(0, -2, 0), vec4(3,5,5,3),4);
+
+                
+                break;
+            }
         }
 
 
@@ -196,5 +222,6 @@ void main() {
     if(emissive == 0) color *= ColorModulator;
     if (color.a < 0.1) discard;
 
-    fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
+    //fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
+    fragColor = mix(color , vertexColor, fogAlpha);
 }

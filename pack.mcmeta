@@ -1,20 +1,63 @@
 {
    "pack": {
-      "pack_format": 10,
+      "pack_format": 30,
       "description": "Magic Shaders! Now for all versions of Minecraft!",
-      "required": [
-         "minecraft:shaders"
-      ]
+		"supported_formats": {
+			"min_inclusive": 14,
+			"max_inclusive": 32767
+		}
    },
    "overlays": {
       "entries": [
          {
             "formats": {
-               "min_inclusive": 32,
+               "min_inclusive": 36,
                "max_inclusive": 99
+            },
+            "directory": "1_21_2"
+         },
+         {
+            "formats": {
+               "min_inclusive": 32,
+               "max_inclusive": 35
             },
             "directory": "1_20_5"
          }
       ]
-   }
+   },
+	"sodium": {
+		"ignored_shaders": [
+			"position_tex_color_normal.fsh",
+			"position_tex_color_normal.json",
+			"position_tex_color_normal.vsh",
+			"particle.fsh",
+			"particle.vsh",
+			"rendertype_clouds.vsh",
+			"rendertype_clouds.fsh",
+			"rendertype_cutout.fsh",
+			"rendertype_cutout.vsh",
+			"rendertype_cutout_mipped.fsh",
+			"rendertype_cutout_mipped.vsh",
+			"rendertype_entity_cutout.fsh",
+			"rendertype_entity_cutout.vsh",
+			"rendertype_entity_cutout_no_cull.fsh",
+			"rendertype_entity_cutout_no_cull.vsh",
+			"rendertype_entity_cutout_no_cull_z_offset.fsh",
+			"rendertype_entity_cutout_no_cull_z_offset.vsh",
+			"rendertype_entity_smooth_cutout.fsh",
+			"rendertype_entity_smooth_cutout.vsh",
+			"rendertype_entity_solid.fsh",
+			"rendertype_entity_solid.vsh",
+			"rendertype_entity_translucent.fsh",
+			"rendertype_entity_translucent.vsh",
+			"rendertype_entity_translucent_cull.fsh",
+			"rendertype_entity_translucent_cull.vsh",
+			"rendertype_entity_translucent_emissive.fsh",
+			"rendertype_entity_translucent_emissive.vsh",
+			"rendertype_solid.fsh",
+			"rendertype_solid.vsh",
+			"fog.glsl",
+			"projection.glsl"
+		]
+	}
 }
