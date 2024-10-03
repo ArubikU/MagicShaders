@@ -38,11 +38,8 @@ flat in ivec4 cems;
 flat in float cem_size;
 flat in int outline;
 flat in vec4 outline_color;
-flat in int isGui;
+
 out vec4 fragColor;
-flat in int skinEffects;
-flat in vec4 data1Color;
-flat in vec4 data2Color;
 
 #moj_import <cem/frag_funcs.glsl>
 #define def_speed 0.22/120
@@ -79,7 +76,7 @@ void main() {
 
     vec4 color = texture(Sampler0, texCoord0);
 
-    if (cem > 0)
+    if (cem != 0)
     {
         #define MINUS_Z
         #moj_import <cem/frag_main_setup.glsl>
@@ -87,37 +84,10 @@ void main() {
         modelSize *= cem_size;
             
         mat3 rotMat = Rotate3(PI / 4, Y);
-        if(bodypart!=-1){
-            for(int cemId = 0 ; cemId < 4; cemId ++)
-            {
-                int cemi = cems.x;
-                if (cemId==1){
-                    cemi = cems.y;
-                }else if (cemId==2){
-                    cemi = cems.z;
-                }else if (cemId==3){
-                    cemi = cems.w;
-                }
-                if(cemi == -1){
-                    continue;
-                }
-            
-                switch (cemi)
-                {
-                    #moj_import <mods/generic.glsl>
-                }
-            }
-        }else{
-            discard;
-        }
-
         
         switch (bodypart){
-            #moj_import <mods/body.glsl>
+            #moj_import <mods/hand.glsl>
         }
-        
-
-
         if (minT == MAX_DEPTH)
             discard;
         writeDepth(dir * minT);
@@ -128,13 +98,15 @@ void main() {
         varying_emissive = 1;
     }
     if (cem < 1 && color.a < 0.1) discard;
-    if (cem < 1) color *= vertexColor;
+
+    if (cem == 0) color *= vertexColor;
+
     if(emissive == 0 && varying_emissive == 0) color *= ColorModulator;
     fragColor = mix(color , vertexColor, fogAlpha);
     if(emissive == 1 || varying_emissive == 1){
         fragColor = color; 
     }
-    if(transparency<1 && varying_emissive!=1 && isGui == 0){
+    if(transparency<1 && varying_emissive!=1){
         fragColor.a = transparency;
     }
 }

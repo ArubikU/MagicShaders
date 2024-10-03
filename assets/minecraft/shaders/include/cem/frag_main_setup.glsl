@@ -1,9 +1,16 @@
 #define VERT_A 100000
 
 vec2 texSize = textureSize(Sampler0, 0);
-vec3 Pos1 = round(cem_pos1.xyz * VERT_A / cem_pos1.w) / VERT_A;
-vec3 Pos2 = round(cem_pos3.xyz * VERT_A / cem_pos3.w) / VERT_A;
-vec3 Pos3 = gl_PrimitiveID % 2 == 0 ? round(cem_pos2.xyz * VERT_A / cem_pos2.w) / VERT_A : round(cem_pos4.xyz * VERT_A / cem_pos4.w) / VERT_A;
+vec3 Pos1 = round(cem_pos1.xyz * VERT_A / cem_pos1.w) ;
+vec3 Pos2 = round(cem_pos3.xyz * VERT_A / cem_pos3.w) ;
+vec3 Pos3 = gl_PrimitiveID % 2 == 0 ? round(cem_pos2.xyz * VERT_A / cem_pos2.w)  : round(cem_pos4.xyz * VERT_A / cem_pos4.w) ;
+
+//optimize  using multiplication
+#define VERT_AUNDEF 0.00001
+Pos1 *= VERT_AUNDEF;
+Pos2 *= VERT_AUNDEF;
+Pos3 *= VERT_AUNDEF;
+
 
 // if (ProjMat[3][0] == -1)
 // {
@@ -35,7 +42,7 @@ vec2 UV2 = round(cem_uv2.xy / cem_uv2.z);
 vec2 stp = min(UV1, UV2);
 vec2 res = abs(UV1 - UV2);
 
-vec3 rawCenter = (Pos1 + Pos2) / 2;
+vec3 rawCenter = (Pos1 + Pos2) * 0.5;
 vec3 center = rawCenter * TBN;
 vec3 dir = normalize(cem_glPos);
 vec3 dirTBN = normalize(cem_glPos * TBN);

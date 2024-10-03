@@ -1,0 +1,3 @@
+
+#define CEM_EARS_BIG 25
+#define CEM_EARS_BIG_ROTATED 26

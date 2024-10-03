@@ -3,14 +3,14 @@
 *  #moj_import <cem/vert_setup.glsl>
 */ 
 
-vec4 modelPos = vec4(Position, 1.0);
+vec4 modelPos = vec4(pos, 1.0);
 modelPos.xyz += vec3(ProjMat[3].xy / vec2(ProjMat[0][0], ProjMat[1][1]), 0) * mat3(ModelViewMat);
 
 vec2 cornerT = corner * 2 - 1;
 if (ProjMat[3][0] == -1)
     cornerT = cornerT.yx * 32;
 
-vec4 cem_Pos = ModelViewMat * modelPos + vec4(cornerT * 2 * cem_size, 0, 0);
+vec4 cem_Pos = ModelViewMat * modelPos + vec4(cornerT * 2.5 * cem_size, 0, 0);
 
 modelPos.w = 1;
 
