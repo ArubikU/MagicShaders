@@ -258,7 +258,7 @@
                 vec4(28,36,8,-4),          // BODY_UP
                 vec4(20,36,8,12),          // BODY_FRONT
                 vec4(32,36,-4,12),          // BODY_LEFT
-                vec4(32,48,8,-12),          // BODY_BACK
+                vec4(40,48,-8,-12),          // BODY_BACK
                 vec4(16,36,4,12),          // BODY_RIGHT
                 0, 0,                      // Unused parameters
                 2, 2,                      // Texture size parameters
