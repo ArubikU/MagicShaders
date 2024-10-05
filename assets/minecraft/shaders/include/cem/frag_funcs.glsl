@@ -25,15 +25,15 @@ color = sSquare(-center, dirTBN, p1 * modelSize, p2 * modelSize, p3 * modelSize,
 }
 
 #define ADD_BOX(pos, size, dSide, uSide, nSide, eSide, sSide, wSide) { \
-color = sBox(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide,false);\
+color = sBox(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide,false);\
 }
 
 #define ADD_BOX_ROTATE(pos, size, Rotation, rotPivot, dSide, uSide, nSide, eSide, sSide, wSide) { \
-color = sBox(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide,false); \
+color = sBox(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide,false); \
 }
 
 #define ADD_SQUARE_ROTATE(pos, size, Rotation, rotPivot, uv) { \
-color = sSquareWithRotation(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, vertexColor, color, minT, uv, rotAngle);\
+color = sSquareWithRotation(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, vertexColor, color, minT, uv, rotAngle);\
 }
 
 #define ADD_TRIANGLE(p1, p2, p3, uv) { \
@@ -56,30 +56,30 @@ color = sTris(-center, dirTBN, p1 * modelSize, p2 * modelSize, p3 * modelSize, c
     color = sSquareWithRotation(-center, dirTBN, p1 * modelSize, p2 * modelSize, p3 * modelSize, true,vertexColor, color, minT, uv, rotAngle);\
 }
 #define ADD_SQUARE_WITH_ROTATION_ROTATE(pos, size, Rotation, rotPivot, uv, rotAngle) { \
-    color = sSquareWithRotation(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize,  false,vertexColor, color, minT, uv, rotAngle); \
+    color = sSquareWithRotation(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize,  false,vertexColor, color, minT, uv, rotAngle); \
 }
 
 #define ADD_BOX_WITH_ROTATION(pos, size, dSide, uSide, nSide, eSide, sSide, wSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle) { \
-    color = sBoxWithRotation(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,false);\
+    color = sBoxWithRotation(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,false);\
 }
 
 #define ADD_BOX_WITH_ROTATION_ROTATE(pos, size, Rotation, rotPivot, dSide, uSide, nSide, eSide, sSide, wSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle) { \
-    color = sBoxWithRotation(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,false); \
+    color = sBoxWithRotation(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,false); \
 }
 
 #define ADD_BOX_WITH_ROTATION_ROTATE_NO_TRANSPARENCY(pos, size, Rotation, rotPivot, dSide, uSide, nSide, eSide, sSide, wSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle) { \
-    color = sBoxWithRotation(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,true); \
+    color = sBoxWithRotation(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,true); \
 }
 #define ADD_BOX_WITH_ROTATION_NO_TRANSPARENCY(pos, size, dSide, uSide, nSide, eSide, sSide, wSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle) { \
-    color = sBoxWithRotation(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,true);\
+    color = sBoxWithRotation(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,true);\
 }
 
 #define ADD_BOX_NO_TRANSPARENCY(pos, size, dSide, uSide, nSide, eSide, sSide, wSide) { \
-color = sBox(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide,true);\
+color = sBox(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide,true);\
 }
 
 #define ADD_BOX_ROTATE_NO_TRANSPARENCY(pos, size, Rotation, rotPivot, dSide, uSide, nSide, eSide, sSide, wSide) { \
-color = sBox(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide,true); \
+color = sBox(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide,true); \
 }
 
 #define ADD_SQUARE_SOLID(p1, p2, p3, color) { \
@@ -87,18 +87,18 @@ color = sBox(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * mo
 }
 
 #define ADD_BOX_SOLID(pos, size, newColor) { \
-    color = sBox_Solid(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT,newColor,false);\
+    color = sBox_Solid(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT,newColor,false);\
 }
 
 #define ADD_BOX_SOLID_EMISSIVE(pos, size, newColor) { \
-    color = sBox_Solid(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT,newColor,true);\
+    color = sBox_Solid(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT,newColor,true);\
 }
 #define ADD_BOX_EXT_SOLID(pos, size, newColor) { \
-    color = sBoxExt_Solid(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT,newColor,false);\
+    color = sBoxExt_Solid(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT,newColor,false);\
 }
 
 #define ADD_BOX_EXT_SOLID_EMISSIVE(pos, size, newColor) { \
-    color = sBoxExt_Solid(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT,newColor,true);\
+    color = sBoxExt_Solid(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT,newColor,true);\
 }
 
 #define ADD_TRIANGLE_SOLID(p1, p2, p3, color) { \
@@ -110,33 +110,33 @@ color = sBox(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * mo
 }
 
 #define ADD_BOX_EXT(pos, size, dSide, uSide, nSide, eSide, sSide, wSide) { \
-color = sBoxExt(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT, dSide, uSide, nSide, wSide, sSide, eSide);\
+color = sBoxExt(-center + pos* modelSize, dirTBN, size * modelSize, TBN, color, minT, dSide, uSide, nSide, wSide, sSide, eSide);\
 }
 
 #define ADD_BOX_EXT_ROTATE(pos, size, Rotation, rotPivot, dSide, uSide, nSide, eSide, sSide, wSide) { \
-color = sBoxExt(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide,false); \
+color = sBoxExt(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide,false); \
 }
 #define ADD_BOX_EXT_WITH_ROTATION(pos, size, dSide, uSide, nSide, eSide, sSide, wSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle) { \
-    color = sBoxExtWithRotation(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,false);\
+    color = sBoxExtWithRotation(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,false);\
 }
 
 #define ADD_BOX_EXT_WITH_ROTATION_ROTATE(pos, size, Rotation, rotPivot, dSide, uSide, nSide, eSide, sSide, wSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle) { \
-    color = sBoxExtWithRotation(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,false); \
+    color = sBoxExtWithRotation(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,false); \
 }
 
 #define ADD_BOX_EXT_WITH_ROTATION_ROTATE_NO_TRANSPARENCY(pos, size, Rotation, rotPivot, dSide, uSide, nSide, eSide, sSide, wSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle) { \
-    color = sBoxExtWithRotation(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,true); \
+    color = sBoxExtWithRotation(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,true); \
 }
 #define ADD_BOX_EXT_WITH_ROTATION_NO_TRANSPARENCY(pos, size, dSide, uSide, nSide, eSide, sSide, wSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle) { \
-    color = sBoxExtWithRotation(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,true);\
+    color = sBoxExtWithRotation(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide, dSideRotationAngle, uSideRotationAngle, nSideRotationAngle, eSideRotationAngle, sSideRotationAngle, wSideRotationAngle,true);\
 }
 
 #define ADD_BOX_EXT_NO_TRANSPARENCY(pos, size, dSide, uSide, nSide, eSide, sSide, wSide) { \
-color = sBoxExt(-center + pos * modelSize, dirTBN, size * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide,true);\
+color = sBoxExt(-center + matf_verifyPos(pos)* modelSize, dirTBN, matf_verifySize(size) * modelSize, TBN, color, minT, uSide, dSide, nSide, wSide, sSide, eSide,true);\
 }
 
 #define ADD_BOX_EXT_ROTATE_NO_TRANSPARENCY(pos, size, Rotation, rotPivot, dSide, uSide, nSide, eSide, sSide, wSide) { \
-color = sBoxExt(Rotation * (-center + (pos + rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, size * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide,true); \
+color = sBoxExt(Rotation * (-center + (matf_verifyPos(pos)+ rotPivot) * modelSize) - rotPivot * modelSize, Rotation * dirTBN, matf_verifySize(size) * modelSize, TBN * inverse(Rotation), color, minT, uSide, dSide, nSide, wSide, sSide, eSide,true); \
 }
 
 vec3 planeIntersect( in vec3 ro, in vec3 rd, in vec3 v0, in vec3 v1, in vec3 v2 )

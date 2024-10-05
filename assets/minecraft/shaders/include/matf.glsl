@@ -69,7 +69,13 @@
 
 #define PINULL Rotate3(0,0)
 
+vec3 matf_verifyPos(vec3 pos){
+	return pos;
+}
 
+vec3 matf_verifySize(vec3 size){
+	return size;
+}
 
 //matrix 4
 
