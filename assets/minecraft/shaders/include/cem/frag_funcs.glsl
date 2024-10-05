@@ -18,10 +18,10 @@ flat in vec4 cem_light;
 #define VECNULL4 vec4(0)
 
 #define ADD_SQUARE(p1, p2, p3, uv) { \
-color = sSquare(-center, dirTBN, p1 * modelSize, p2 * modelSize, p3 * modelSize,  false,vertexColor, color, minT, uv);\
+color = sSquare(-center, dirTBN, matf_verifyPos(p1) * modelSize, matf_verifyPos(p2) * modelSize, matf_verifyPos(p3) * modelSize,  false,vertexColor, color, minT, uv);\
 }
 #define ADD_SQUARE_LIGHT_FIX(p1, p2, p3, uv) { \
-color = sSquare(-center, dirTBN, p1 * modelSize, p2 * modelSize, p3 * modelSize,  true,vertexColor, color, minT, uv);\
+color = sSquare(-center, dirTBN, matf_verifyPos(p1) * modelSize, (p2) * modelSize, matf_verifyPos(p3) * modelSize,  true,vertexColor, color, minT, uv);\
 }
 
 #define ADD_BOX(pos, size, dSide, uSide, nSide, eSide, sSide, wSide) { \
