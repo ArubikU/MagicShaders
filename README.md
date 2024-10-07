@@ -42,12 +42,9 @@ now put the resourcepack without MagicShaders/capes , MagicShaders/wings and Mag
 | Red Mechanical Wings | Silver Mechanical Wings | Mosquitoes Wings | | |
 
 
-Player Modifications
-Female Chest	
-
 |Player Modifications| | | | |
 |--|--|--|--|--|
-| Female Chest | | | | |
+| Female Chest | Elf Ears | Normal Ears | | |
 
 
 
@@ -66,7 +63,10 @@ RoadMap
 Finished
 - Wings [​8/15]
 - Capes [​FULL]
-- PlayerModifications [​1/15]
+- PlayerModifications [​3/15]
+
+Extra:
+If you would like to donate or bought the commercial use (One time payment) use my [ko-fi](https://ko-fi.com/arubik)
 
 CREDITS:
 Capes made by Torrezx ft. ShadowsCrow
