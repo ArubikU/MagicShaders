@@ -1,0 +1,58 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+projects: ["MagicShaders"]
+assignees:
+  - ArubikU
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What client of minecraft are you running?
+      options:
+        - 1.21.1 (Default)
+        - "1.21.0"
+        - "1.20.6"
+        - "1.20.5"
+        - "1.20.4"
+        - "1.20.4 <"
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: client
+    attributes:
+      label: Client
+      description: What client of minecraft are you running?
+      options:
+        - Vanilla (Default)
+        - Optifine
+        - Sodium
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: textarea
+    id: error
+    attributes:
+      label: Issue
+      description: Write your issue here
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [License](https://github.com/ArubikU/MagicShaders/blob/main/LICENSE). 
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
