@@ -51,8 +51,8 @@ body:
   - type: checkboxes
     id: terms
     attributes:
-      label: Code of Conduct
+      label: Acceptance of TOS and License
       description: By submitting this issue, you agree to follow our [License](https://github.com/ArubikU/MagicShaders/blob/main/LICENSE). 
       options:
-        - label: I agree to follow this project's Code of Conduct
+        - label: I agree to follow this project's and their License
           required: true
