@@ -134,7 +134,7 @@ void main() {
         bool isSlim = samp1.a == 0.0 || (((samp1.r + samp1.g + samp1.b) == 0.0) && ((samp2.r + samp2.g + samp2.b) == 0.0) && samp1.a == 1.0 && samp2.a == 1.0);
         if(isSlim) slim = 1;
 
-        if((FogStart > 3e38) && (ProjMat[2][3] != 0) && isHead == false){
+        if((FogStart > 3e38) && (ProjMat[2][3] != 0)){
             bodypart = FIRST_PERSON_RIGHT_HAND;
             if(isSlim)
                 bodypart = FIRST_PERSON_RIGHT_HAND_SLIM;
