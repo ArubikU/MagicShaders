@@ -4,8 +4,8 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "render_solid_entity",
-    "fragment": "render_solid_entity",
+    "vertex": "core/render_solid_entity",
+    "fragment": "core/render_solid_entity",
     "attributes": [
         "Position",
         "Color",
